@@ -1,7 +1,24 @@
-var http = require('http');
+const {ApolloServer, gql} = require('apollo-server')
 
-http.createServer(function (req, res){ 
+const typeDefs = gql`
+	type Query {
+		ola: String
+	}
+`
 
-	res.end('Teste');
+const resolvers = {
+	Query: {
+		ola() {
+			return 'Baster Retorna uma String'
+		}
+	}
+}
 
-}).listen(80);
+const server = new ApolloServer({
+	typeDefs, 
+	resolvers
+})
+
+server.listen(80).then(({url}) => {
+	console.log("Tete")
+})
