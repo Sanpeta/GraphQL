@@ -1,0 +1,17 @@
+{
+  "name": "schema-query",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "apollo-server": "^2.8.1",
+    "graphql": "^14.4.2",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
