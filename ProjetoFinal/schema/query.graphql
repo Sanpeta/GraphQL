@@ -1,0 +1,11 @@
+type Query {
+    ola: String
+    data: String
+    usuarioLogado: Usuario
+    produtoEmDestaque: Produto
+    numerosMegaSenha: [Int]
+    usuarios: [Usuario]
+    usuario(id: Int): Usuario
+    perfis: [Perfil]
+    perfil(id: Int): Perfil
+}

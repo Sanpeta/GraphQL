@@ -6,10 +6,12 @@
   "dependencies": {
     "apollo-server": "^2.8.1",
     "graphql": "^14.4.2",
+    "graphql-import": "^0.7.1",
     "nodemon": "^1.19.1"
   },
   "devDependencies": {},
   "scripts": {
+    "start": "nodemon --ext js, graphql",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
