@@ -1,15 +1,54 @@
 const {ApolloServer, gql} = require('apollo-server')
 
+const usuarios = [{
+		id: 1,
+		nome: "Sidnei de Souza 1",
+		email: "sidnei1@Gmail.com",
+		idade: 23,
+		perfil_id: 1
+	},
+	{
+		id: 2,
+		nome: "Sidnei de Souza 2",
+		email: "sidnei2@Gmail.com",
+		idade: 25,
+		perfil_id: 1
+	},
+	{
+		id: 3,
+		nome: "Sidnei de Souza 3",
+		email: "sidnei3@Gmail.com",
+		idade: 26,
+		perfil_id: 2
+	}
+];
+
+const perfis =[{
+		id: 1,
+		nome: "Comum"
+	},
+	{
+		id: 2,
+		nome: "Administrador"
+	}
+];
+
 const typeDefs = gql`	
 	
 	type Usuario {
-		id: ID!
+		id: Int!
 		nome: String!
 		email: String!
 		idade: Int
 		salario: Float
 		vip: Boolean
 		teste: String
+		perfil: Perfil
+	}
+	
+	type Perfil {
+		id: Int
+		nome: String
 	}
 
 	type Produto {
@@ -25,6 +64,10 @@ const typeDefs = gql`
 		usuarioLogado: Usuario
 		produtoEmDestaque: Produto
 		numerosMegaSenha: [Int]
+		usuarios: [Usuario]
+		usuario(id: Int): Usuario
+		perfis: [Perfil]
+		perfil(id: Int): Perfil
 	}
 `
 
@@ -35,6 +78,10 @@ const resolvers = {
 		},
 		teste(usuario) {
 			return usuario.nome
+		},
+		perfil(usuario) {
+			const sels = perfis.filter(p => p.id === usuario.perfil_id)
+			return sels ? sels[0] : null
 		}
 	},
 	Produto: {
@@ -74,6 +121,20 @@ const resolvers = {
 			const crescente = (a, b) => a - b
 			return Array(6).fill(0).map(n => parseInt(Math.random() *60 + 1)).sort(crescente)
 
+		},
+		usuarios() {
+			return usuarios;
+		},
+		usuario(_, {id}) {
+			const selecionados = usuarios.filter(u => u.id === id)
+			return selecionados ? selecionados[0] : null
+		},
+		perfis() {
+			return perfis;
+		},
+		perfil(_, {id}) {
+			const perfil = perfis.filter(p => p.id === id)
+			return perfil ? perfil[0] : null
 		}
 	}
 }
