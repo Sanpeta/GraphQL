@@ -1,4 +1,4 @@
-const {usuarios, proximoId} = require('../data/db');
+const {usuarios, proximoId} = require('../../data/db');
 function indiceUsuario(filtro) {
     if (!filtro) {
         return -1;
@@ -44,15 +44,15 @@ module.exports = {
         return excluidos ? excluidos[0] : null;
     },
 
-    alterarUsuario(_, args) {
-        const i = usuarios.findIndex(u => u.id === args.id);
+    alterarUsuario(_, {filtro, dados}) {
+        const i = indiceUsuario(filtro);
         if (i < 0) {
             return null;
         }
         //aqui estou fazendo uma intersecção entre usuario[i] e args e adicionado tudo na constante usuario
         const usuario = {
             ...usuarios[i],
-            ...args
+            ...dados
         };
 
         //estou removendo um elemnto no array e adicionando um novo
